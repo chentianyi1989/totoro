@@ -8,3 +8,5 @@ echo str_replace('includes/init.php', '', str_replace('\\', '/', __FILE__));
 
 define('root',dirname(__FILE__));
 define('ctx',dirname($_SERVER[SCRIPT_NAME]));
+
+echo "<br/>root-->".root."<br/>ctx-->".ctx."<br/>REQUEST_URI-->".$_SERVER['REQUEST_URI'];

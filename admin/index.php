@@ -1,8 +1,8 @@
 <?
 
 define('IN_ECS', true);
-require_once 'commons/init.php';
-require 'commons/smarty/cls_smarty.php';
+require_once '../commons/init.php';
+require '../commons/smarty/cls_smarty.php';
 $smarty = new cls_smarty();
 $smarty->assign("name","chentianyi");
 $smarty->assign("ctx",ctx);
@@ -10,9 +10,7 @@ $smarty->assign("ctx",ctx);
 
 
 
-echo "<br/>".$smarty->smarty->compile_dir;
-
-$smarty->display("index.html");
+$smarty->display("admin/index.html");
 
 
 

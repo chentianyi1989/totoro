@@ -1,32 +1,45 @@
+<?php /* Smarty version 2.6.28, created on 2015-04-28 08:23:21
+         compiled from admin/index.html */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>首页111111</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
-	<link rel="stylesheet" type="text/css" href="#{$ctx}/themes/default/js/plugins/default.css" />
-	<link rel="stylesheet" type="text/css" href="#{$ctx}/themes/default/js/plugins/ui/themes/icon.css"/>
-	<link rel="stylesheet" type="text/css" href="#{$ctx}/themes/default/js/plugins/ui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->_tpl_vars['ctx']; ?>
+/themes/default/js/plugins/default.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->_tpl_vars['ctx']; ?>
+/themes/default/js/plugins/ui/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->_tpl_vars['ctx']; ?>
+/themes/default/js/plugins/ui/themes/default/easyui.css">
 	
-	<script type="text/javascript" src="#{$ctx}/themes/default/js/plugins/jquery.min.js"></script>
-	<script type="text/javascript" src="#{$ctx}/themes/default/js/plugins/inti.js"></script>
-	<script type="text/javascript" src="#{$ctx}/themes/default/js/plugins/ui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->_tpl_vars['ctx']; ?>
+/themes/default/js/plugins/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo $this->_tpl_vars['ctx']; ?>
+/themes/default/js/plugins/inti.js"></script>
+	<script type="text/javascript" src="<?php echo $this->_tpl_vars['ctx']; ?>
+/themes/default/js/plugins/ui/jquery.easyui.min.js"></script>
 	
 	<script type="text/javascript">
 		var _menus = {"menus":[
 			{"menuid":"1","icon":"icon-sys","menuname":"用户管理",
 				"menus":[
-			        {"menuname":"ssss","icon":"icon-nav","url":"#{$ctx}/admin/user/user.php"},
+			        {"menuname":"ssss","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
+/admin/user/user.php"},
 				]
 			},{"menuid":"2","icon":"icon-sys","menuname":"日志管理",
 				"menus":[
-			        {"menuname":"系统日志","icon":"icon-nav","url":"#{$ctx}/base/security/role/role!list.do"},
-			        {"menuname":"操作日志","icon":"icon-nav","url":"#{$ctx}/base/security/user/user!list.do"},
-			        {"menuname":"登陆日志","icon":"icon-nav","url":"#{$ctx}/base/security/user/user!list.do"},
+			        {"menuname":"系统日志","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
+/base/security/role/role!list.do"},
+			        {"menuname":"操作日志","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
+/base/security/user/user!list.do"},
+			        {"menuname":"登陆日志","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
+/base/security/user/user!list.do"},
 				]
 			},{"menuid":"3","icon":"icon-sys","menuname":"我的工作区间",
 				"menus":[
-			        {"menuname":"我的待办","icon":"icon-nav","url":"#{$ctx}/business/workflow!myTask.do"},
+			        {"menuname":"我的待办","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
+/business/workflow!myTask.do"},
 				]
 			}
 		]};
@@ -111,7 +124,8 @@
 <!-- 顶部区域 -->
 <div region="north" split="true" border="false" style="overflow: hidden; height: 30px;">
     <span style="float:right; padding-right:20px;" class="head">
-    	欢迎  #{$name } 
+    	欢迎  <?php echo $this->_tpl_vars['name']; ?>
+ 
 	    <a href="#" id="editpass">修改密码</a> 
 	    <a href="#" id="loginOut">安全退出</a></span>
     <span style="padding-left:10px; font-size: 16px; ">

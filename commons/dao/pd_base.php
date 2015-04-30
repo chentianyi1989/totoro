@@ -137,7 +137,7 @@ EOT;
 	}
 	echo <<<EOT
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>爱上同城网 提示</title>
+<title>温馨提示</title>
 <style type="text/css">
 <!--
 body {

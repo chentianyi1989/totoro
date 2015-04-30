@@ -12,6 +12,8 @@ if (empty($act)) {
 
 if ($act == "list") {
 	
+	$db->select();
+	
 }elseif ($act == "add") {
 	
 }elseif ($act == "save") {

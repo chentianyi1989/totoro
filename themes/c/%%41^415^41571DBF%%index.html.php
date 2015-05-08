@@ -1,9 +1,9 @@
-<?php /* Smarty version 2.6.28, created on 2015-04-28 08:23:21
+<?php /* Smarty version 2.6.28, created on 2015-04-30 11:24:42
          compiled from admin/index.html */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>首页111111</title>
+	<title>后台管理首页</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->_tpl_vars['ctx']; ?>
@@ -24,7 +24,7 @@
 		var _menus = {"menus":[
 			{"menuid":"1","icon":"icon-sys","menuname":"用户管理",
 				"menus":[
-			        {"menuname":"ssss","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
+			        {"menuname":"用户管理","icon":"icon-nav","url":"<?php echo $this->_tpl_vars['ctx']; ?>
 /admin/user/user.php"},
 				]
 			},{"menuid":"2","icon":"icon-sys","menuname":"日志管理",
@@ -129,7 +129,8 @@
 	    <a href="#" id="editpass">修改密码</a> 
 	    <a href="#" id="loginOut">安全退出</a></span>
     <span style="padding-left:10px; font-size: 16px; ">
-		${project.name }</span>
+		<?php echo $this->_tpl_vars['projectName']; ?>
+</span>
 </div>
 <!-- 底部区域 -->
 <div region="south" split="true" style="height: 30px; background: #D2E0F2; ">

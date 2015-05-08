@@ -2,10 +2,8 @@
 
 define('IN_ECS', true);
 require_once '../commons/init.php';
-require '../commons/smarty/cls_smarty.php';
-$smarty = new cls_smarty();
-$smarty->assign("name","chentianyi");
-$smarty->assign("ctx",ctx);
+
+
 //print_r($_SERVER);
 
 

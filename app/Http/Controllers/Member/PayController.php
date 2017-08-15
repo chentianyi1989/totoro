@@ -89,11 +89,11 @@ class PayController extends WebBaseController
         //
         if ($typeId == 1)
         {
-            if ($amount> 2000 || $amount < 100)
-                return respF('支付宝扫码充值范围100-2000元');
+            if ($amount> 2000 || $amount < 0)
+                return respF('支付宝扫码充值范围0-2000元');
         } elseif ($typeId ==2) {
-            if ($amount > 3000 || $amount < 100)
-                return respF('微信扫码充值范围100-3000元');
+            if ($amount > 3000 || $amount < 0)
+                return respF('微信扫码充值范围0-3000元');
         }
 
 

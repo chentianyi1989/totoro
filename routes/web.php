@@ -11,19 +11,24 @@
 |
 */
 
+Route::group(['namespace' => 'Install'],function ($router)
+{
+    Route::get('/aaa','InstallController@index');
+    
+});
 
-Route::group(['domain' => 'm.mxxfun.com', 'namespace' => 'Wap'],function ($router)
+Route::group(['domain' => 'm.localhost', 'namespace' => 'Wap'],function ($router)
 {
     Route::get('/','IndexController@index')->name('wap.init');
 
 });
 
-Route::group(['domain' => 'admin.mxxfun.com'],function ($router)
+Route::group(['domain' => 'admin.localhost'],function ($router)
 {
     $router->get('/', 'Admin\AuthController@getLogin')->name('admin.init');
 });
 //二级域名指向
-Route::group(['domain' => 'agent.mxxfun.com'],function ($router)
+Route::group(['domain' => 'agent.localhost'],function ($router)
 {
     $router->get('/', 'Daili\AuthController@getLogin')->name('daili.init');
 });
@@ -41,7 +46,7 @@ Route::group(['prefix' => 'sync','namespace' => 'Sync'],function ($router)
 });
 
 //手机
-Route::group(['domain' => 'm.mxxfun.com', 'prefix' => 'm','namespace' => 'Wap'],function ($router)
+Route::group(['domain' => 'm.localhost', 'prefix' => 'm','namespace' => 'Wap'],function ($router)
 {
     $router->get('/', 'IndexController@index')->name('wap.index');
 
@@ -215,7 +220,7 @@ Route::group(['prefix' => 'member','namespace' => 'Member'],function ($router)
 
 });
 
-Route::group(['domain' => 'agent.mxxfun.com','prefix' => 'daili','namespace' => 'Daili'],function ($router){
+Route::group(['domain' => 'agent.localhost','prefix' => 'daili','namespace' => 'Daili'],function ($router){
 
     Route::get('/login', ['as' => 'daili.login','uses' => 'AuthController@getLogin']);
     Route::post('/login', ['as' => 'daili.login.post','uses' => 'AuthController@postLogin']);
@@ -251,7 +256,7 @@ Route::group(['domain' => 'agent.mxxfun.com','prefix' => 'daili','namespace' => 
     });
 });
 
-Route::group(['domain' => 'admin.mxxfun.com','prefix' => 'admin','namespace' => 'Admin'],function ($router){
+Route::group(['domain' => 'admin.localhost','prefix' => 'admin','namespace' => 'Admin'],function ($router){
 
     Route::get('/login', ['as' => 'admin.login','uses' => 'AuthController@getLogin']);
     Route::post('/login', ['as' => 'admin.login.post','uses' => 'AuthController@postLogin']);

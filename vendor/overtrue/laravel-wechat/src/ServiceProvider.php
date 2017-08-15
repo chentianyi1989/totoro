@@ -2,22 +2,15 @@
 
 namespace Overtrue\LaravelWechat;
 
-use EasyWeChat\Foundation\Application as EasyWeChatApplication;
+use EasyWeChat\Foundation\Application as EasyWeChat;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
-use Overtrue\LaravelWechat\ServiceProviders\RouteServiceProvider;
+use Overtrue\LaravelWechat\Routing\Router;
 use Overtrue\Socialite\User as SocialiteUser;
 
 class ServiceProvider extends LaravelServiceProvider
 {
-    /**
-     * 延迟加载.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Boot the provider.
      *
@@ -27,8 +20,8 @@ class ServiceProvider extends LaravelServiceProvider
     {
         $this->setupConfig();
 
-        if ($this->isEnableOpenPlatform()) {
-            $this->app->register(RouteServiceProvider::class);
+        if ($this->config('route.enabled')) {
+            $this->registerRoutes();
         }
     }
 
@@ -64,28 +57,18 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(EasyWeChatApplication::class, function ($laravelApp) {
-            $app = new EasyWeChatApplication(config('wechat'));
+        $this->app->singleton(EasyWeChat::class, function ($app) {
+            $easywechat = new EasyWeChat(config('wechat'));
             if (config('wechat.use_laravel_cache')) {
-                $app->cache = new CacheBridge();
+                $easywechat->cache = new CacheBridge();
             }
-            $app->server->setRequest($laravelApp['request']);
+            $easywechat->server->setRequest($app['request']);
 
-            return $app;
+            return $easywechat;
         });
 
-        $this->app->alias(EasyWeChatApplication::class, 'wechat');
-        $this->app->alias(EasyWeChatApplication::class, 'easywechat');
-    }
-
-    /**
-     * 提供的服务
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['wechat', EasyWeChatApplication::class];
+        $this->app->alias(EasyWeChat::class, 'wechat');
+        $this->app->alias(EasyWeChat::class, 'easywechat');
     }
 
     /**
@@ -110,22 +93,40 @@ class ServiceProvider extends LaravelServiceProvider
     }
 
     /**
-     * Check open platform is configured.
-     *
-     * @return bool
+     * Register routes.
      */
-    private function isEnableOpenPlatform()
+    protected function registerRoutes()
     {
-        return $this->config()->has('wechat.open_platform');
+        $router = new Router($this->app);
+
+        $router->group($this->routeAttributes(), function () use ($router) {
+            $router->any($this->config('route.open_platform_serve_url'), 'OpenPlatformController@index');
+        });
+    }
+
+
+    /**
+     * Get Route attributes.
+     *
+     * @return array
+     */
+    public function routeAttributes()
+    {
+        return array_merge($this->config('route.attributes', []), [
+            'namespace' => '\\Overtrue\\LaravelWechat\\Controllers',
+        ]);
     }
 
     /**
-     * Get config value by key
+     * Get config value by key.
      *
-     * @return \Illuminate\Config\Repository
+     * @param string $key
+     * @param mixed|null $default
+     *
+     * @return mixed
      */
-    private function config()
+    private function config($key, $default = null)
     {
-        return $this->app['config'];
+        return $this->app->make('config')->get("wechat.{$key}", $default);
     }
 }

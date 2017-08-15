@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the overtrue/socialite.
+ *
+ * (c) overtrue <i@overtrue.me>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 use Overtrue\Socialite\Providers\WeChatOpenPlatformProvider as RealWeChatOpenPlatformProvider;
 use Overtrue\Socialite\Providers\WeChatProvider as RealWeChatProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +37,7 @@ class WechatProviderTest extends PHPUnit_Framework_TestCase
     {
         $provider = new WeChatProvider(Request::create('foo'), 'client_id', 'client_secret', 'http://localhost/socialite/callback.php');
 
-        $this->assertEquals('https://api.weixin.qq.com/sns/oauth2/access_token', $provider->tokenUrl());
+        $this->assertSame('https://api.weixin.qq.com/sns/oauth2/access_token', $provider->tokenUrl());
         $this->assertSame([
             'appid' => 'client_id',
             'secret' => 'client_secret',
@@ -49,7 +58,7 @@ class WechatProviderTest extends PHPUnit_Framework_TestCase
     {
         $provider = new WeChatOpenPlatformProvider(Request::create('foo'), 'client_id', ['component-app-id', 'component-access-token'], 'redirect-url');
 
-        $this->assertEquals('https://api.weixin.qq.com/sns/oauth2/component/access_token', $provider->tokenUrl());
+        $this->assertSame('https://api.weixin.qq.com/sns/oauth2/component/access_token', $provider->tokenUrl());
         $this->assertSame([
             'appid' => 'client_id',
             'component_appid' => 'component-app-id',
@@ -65,6 +74,30 @@ class WechatProviderTest extends PHPUnit_Framework_TestCase
             'state' => 'state',
             'component_appid' => 'component-app-id',
         ], $provider->codeFields('state'));
+    }
+
+    public function testOpenPlatformComponent()
+    {
+        $provider = new WeChatProvider(Request::create('foo'), 'client_id', null, 'redirect-url');
+        $provider->component(new WeChatComponent());
+        $this->assertSame([
+            'appid' => 'client_id',
+            'redirect_uri' => 'redirect-url',
+            'response_type' => 'code',
+            'scope' => 'snsapi_base',
+            'state' => 'state',
+            'component_appid' => 'component-app-id',
+        ], $provider->codeFields('state'));
+
+        $this->assertSame([
+            'appid' => 'client_id',
+            'component_appid' => 'component-app-id',
+            'component_access_token' => 'token',
+            'code' => 'simcode',
+            'grant_type' => 'authorization_code',
+        ], $provider->tokenFields('simcode'));
+
+        $this->assertSame('https://api.weixin.qq.com/sns/oauth2/component/access_token', $provider->tokenUrl());
     }
 }
 
@@ -94,4 +127,17 @@ class WeChatProvider extends RealWeChatProvider
 class WeChatOpenPlatformProvider extends RealWeChatOpenPlatformProvider
 {
     use ProviderTrait;
+}
+
+class WeChatComponent implements \Overtrue\Socialite\WeChatComponentInterface
+{
+    public function getAppId()
+    {
+        return 'component-app-id';
+    }
+
+    public function getToken()
+    {
+        return 'token';
+    }
 }

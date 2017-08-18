@@ -47,16 +47,19 @@ class MemberOfflineController extends DailiBaseController
             return responseWrong($messages);
         }
 
-        if (strlen((string)$request->get('name')) >10  || strlen((string)$request->get('name')) < 7)
-            return responseWrong('用户名为7-10位数字字母组合');
+        if (strlen((string)$request->get('name')) >10  || strlen((string)$request->get('name')) < 7){
+            return responseWrong('用户名为7-10位数字字母组合');}
 
-        if(preg_match("/[\'.,:;*?~`!@#$%^&+=)(<>{}]|\]|\[|\/|\\\|\"|\|/",$request->get('name')))
-            return responseWrong('不允许输入特殊字符');
-
+        if(preg_match("/[\'.,:;*?~`!@#$%^&+=)(<>{}]|\]|\[|\/|\\\|\"|\|/",$request->get('name'))){
+            return responseWrong('不允许输入特殊字符');}
+        if(preg_match("/[\'.,:;*?~`!@#$%^&+=)(<>{}]|\]|\[|\/|\\\|\"|\|/",$request->get('real_name'))){
+            return responseWrong('姓名不允许输入特殊字符');
+        }        
         $daili = $this->getDaili();
         $data = $request->all();
 
             Member::create([
+                'real_name'=>$data['real_name'],
                 'name' => $data['name'],
                 'password' => 123456,
                 'original_password' => 123456,

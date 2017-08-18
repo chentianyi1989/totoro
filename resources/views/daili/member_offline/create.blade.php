@@ -18,7 +18,7 @@
                         </div>
                         <div class="form-group">
                         	<label for="username" class="col-sm-2 control-label">姓名</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-7"> 
                                  <input type="text" class="form-control" id="real_name" name="real_name" placeholder="姓名" />
                             </div>
                         </div>

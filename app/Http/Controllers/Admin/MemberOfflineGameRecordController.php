@@ -39,7 +39,7 @@ class MemberOfflineGameRecordController extends Controller
             $mod = $mod->where('betTime', '<=',$end_at);
         }
 
-        $data = $mod->orderBy('created_at', 'desc')->paginate(config('admin.page-size'));
+        $data = $mod->orderBy('betTime', 'desc')->paginate(config('admin.page-size'));
 
         $total_netAmount = $mod->sum('netAmount');
         $total_betAmount = $mod->sum('betAmount');

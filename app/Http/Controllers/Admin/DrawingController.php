@@ -36,8 +36,10 @@ class DrawingController extends Controller
             $mod = $mod->where('created_at', '<=',$end_at);
         }
 
+//         $data = $mod->from("drawing as d")->leftJoin("members as m",'d.member_id','=','m.id')->orderBy('d.created_at', 'desc')->paginate(config('admin.page-size'));
+        
         $data = $mod->orderBy('created_at', 'desc')->paginate(config('admin.page-size'));
-
+        
         $total_money = $mod->sum('money');
         $total_counter_fee = $mod->sum('counter_fee');
 

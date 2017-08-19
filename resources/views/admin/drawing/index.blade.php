@@ -17,7 +17,7 @@
                         <th style="width: 15%">开户行/卡号</th>
                         <th style="width: 15%">开户人/开户地址</th>
                         <th style="width: 5%">用户名</th>
-                        <th style="width: 10%">手机号</th>
+                        <th style="width: 10%">姓名/手机号</th>
                         <th style="width: 10%">申请时间</th>
                         <th style="width: 5%">操作人</th>
                         <th style="width: 10%">状态</th>
@@ -47,7 +47,7 @@
                                 {{ $item->member->name or '已删除'}}
                             </td>
                             <td>
-                                {{ $item->phone }}
+                                {{ $item->member->real_name }}/{{ $item->member->phone }}
                             </td>
                             <td>
                                 {{ $item->created_at }}

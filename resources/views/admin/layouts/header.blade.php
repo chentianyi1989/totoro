@@ -113,6 +113,17 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 <!-- User Account Menu -->
+                
+                <li class="dropdown user user-menu" id="li_closeTipSound">
+                	<a href="javascript:void(0)" onclick="closeTipSound(this)" class="dropdown-toggle" data-toggle="dropdown">
+                		关闭提示音
+                	</a>
+                </li>
+                <li class="dropdown user user-menu" id="li_openTipSound" style="display: none">
+                	<a href="javascript:void(0)" onclick="openTipSound(this)" class="dropdown-toggle" data-toggle="dropdown">
+                		打开提示音
+                	</a>
+                </li>
                 <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -169,10 +180,24 @@
 <audio id="sk" src="{{ asset('/backstage/audio/hk_notice.mp3') }}"></audio>
 <audio id="tk" src="{{ asset('/backstage/audio/tk_notice.mp3') }}"></audio>
 <script>
-    var hk_url = "{{ route('admin.hk_notice') }}";
-    var tk_url = "{{ route('admin.tk_notice') }}";
-    $(function(){
-        var sk_timer=setInterval(function(){
+
+	function closeTipSound () {
+		if (sk_timer) {
+			clearInterval(sk_timer)
+		}
+		if (tk_timer) {
+			clearInterval(tk_timer)
+		}
+		$("#li_closeTipSound").css("display","none");
+		$("#li_openTipSound").css("display","");
+	}
+	
+	var sk_timer;
+	var tk_timer;
+	function openTipSound () {
+		$("#li_closeTipSound").css("display","");
+		$("#li_openTipSound").css("display","none");
+		sk_timer=setInterval(function(){
             $.ajax({
                 url:hk_url,
                 data:'',
@@ -184,8 +209,8 @@
                     }
                 }
             })
-        },10000);
-        var tk_timer=setInterval(function(){
+        },60000);
+        tk_timer=setInterval(function(){
             $.ajax({
                 url:tk_url,
                 data:'',
@@ -197,6 +222,13 @@
                     }
                 }
             })
-        },10000);
+        },60000);
+	}
+	
+
+    var hk_url = "{{ route('admin.hk_notice') }}";
+    var tk_url = "{{ route('admin.tk_notice') }}";
+    $(function(){
+    	openTipSound ();
     });
 </script>

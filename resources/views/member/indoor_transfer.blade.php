@@ -39,6 +39,7 @@
                 if (in_array($item->id, $own_api_list))
                     $mod = $_member->apis()->where('api_id', $item->id)->first();
                 ?>
+                
                 {{--<li>--}}
                     {{--<p class="name">{{ $item->api_name }}厅 <span class="pos">@if($mod) {{ $mod->money }}  @else N/A @endif</span><a class="refresh" href="javascript:;" data-uri="{{ route('member.api.check') }}?api_name={{ $item->api_name }}"></a></p>--}}
                     {{--<p class="account">游戏账号：<span class="viceColor" data-username="{{ $item->prefix.$_member->name }}">@if($mod) {{ $mod->username }}  @else 未开通 @endif</span></p>--}}

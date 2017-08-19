@@ -11,13 +11,13 @@
                     {!! csrf_field() !!}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">用户名</label>
+                            <label for="name" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="用户名" />
+                                <input type="text" class="form-control" id="name" name="name" placeholder="用户名" />
                             </div>
                         </div>
                         <div class="form-group">
-                        	<label for="username" class="col-sm-2 control-label">姓名</label>
+                        	<label for="real_name" class="col-sm-2 control-label">姓名</label>
                             <div class="col-sm-7"> 
                                  <input type="text" class="form-control" id="real_name" name="real_name" placeholder="姓名" />
                             </div>

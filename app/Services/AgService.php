@@ -64,6 +64,7 @@ class AgService{
         $transSN = date("YmdHms");//交易编号
         $code = $this->salt.md5($this->comKey.$this->comId.$username.$password.$transSN.$amount.$this->isspeed.$this->isdemo.$this->salt);
         $url = "http://".$this->domain."/api/ag/deposit.ashx";
+        echo $url;
         $post_data = array('apiAccount'=>$this->comId,'userName'=>$username,'password'=>$password,'transSN'=>$transSN,'amount'=>$amount,'currencyCode'=>$this->currencyCode,'isSpeed'=>$this->isspeed,'isDemo'=>$this->isdemo,'code'=>$code);
         $receive = $this->send_post($url,$post_data);
         return $receive;

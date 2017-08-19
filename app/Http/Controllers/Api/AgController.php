@@ -164,6 +164,14 @@ class AgController extends WebBaseController
         return $return;
     }
 
+    /**
+     * 提款
+     * @param unknown $username
+     * @param unknown $password
+     * @param unknown $amount
+     * @param string $amount_type
+     * @return number[]|string[]|mixed[]
+     */
     public function withdrawal($username, $password, $amount, $amount_type = 'money')
     {
         //检查账号是否注册

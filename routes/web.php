@@ -259,6 +259,8 @@ Route::group(['domain' => env("admin_domain","admin.localhost"),'prefix' => 'adm
     Route::get('/loginOut', ['as' => 'admin.login.out','uses' => 'AuthController@getLoginOut']);
     $router->get('hk_notice', 'AdminController@hk_notice')->name('admin.hk_notice');
     $router->get('tk_notice', 'AdminController@tk_notice')->name('admin.tk_notice');
+    
+//     Route::get('syncGameRecord', 'GameRecordController@syncGameRecord')->name("admin.syncGameRecord");
     //需要登录
     Route::group(['middleware' => ['authorize']], function($router){
         //后台首页
@@ -292,12 +294,13 @@ Route::group(['domain' => env("admin_domain","admin.localhost"),'prefix' => 'adm
         Route::resource('dividend', 'DividendController');
         //登录记录
         Route::resource('member_login_log', 'MemberLoginLogController');
+        
         //游戏记录
         Route::resource('game_record', 'GameRecordController');
         //平台转账
         Route::resource('transfer', 'TransferController');
 
-
+        
         //返水
         //返水等级
         Route::resource('fs_level', 'FsLevelController');

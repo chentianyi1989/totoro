@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Models\GameRecord;
+
 class GameRecordController extends AdminBaseController
 {
 
@@ -42,7 +43,21 @@ class GameRecordController extends AdminBaseController
 
         return view('admin.game_record.index', compact('data', 'playerName', 'start_at', 'end_at', 'api_type', 'total_netAmount', 'total_betAmount'));
     }
-
+    
+    public function syncGameRecord (Request $request){
+        
+//         use App\Http\Controllers\Api\AgController;
+//         use App\Http\Controllers\Api\BbinController;
+        
+        $ag = \App::make(\App\Http\Controllers\Api\AgController::class);
+        \App::call([$ag, "getGameRecord"]);
+        
+        $bbin = \App::make(\App\Http\Controllers\Api\BbinController::class);
+        \App::call([$bbin, "getGameRecord"]);
+        
+        return $this->index($request);
+        
+    }
 //    public function index(Request $request)
 //    {
 //        $mod = new GameRecord();

@@ -293,7 +293,6 @@ class AgController extends WebBaseController
         $page = 1;
         $pagesize = 5000;
 
-
         //$res = json_decode($this->service->betrecord('', $start_time, $end_date,$page, $pagesize), TRUE);
 
         $res = $this->dy('', $start_time, $end_date,$page, $pagesize);
@@ -355,7 +354,8 @@ class AgController extends WebBaseController
                                 'agentCode' => $value["AgentCode"],
                                 'gameCode' => $value["GameCode"],
                                 'netAmount' => $value["TransferAmount"],
-                                'betTime' => date('Y-m-d H:i:s', strtotime($value["CreateDate"]) + 12*60*60),
+//                                 'betTime' => date('Y-m-d H:i:s', strtotime($value["CreateDate"]) + 12*60*60),    // 如果与游戏返回的时间相差12小时则补齐
+                                'betTime' => date('Y-m-d H:i:s', strtotime($value["CreateDate"])),
                                 'gameType' => $gameType,
                                 'betAmount' => $value["Cost"],
                                 'validBetAmount' => $value["ValidBetAmount"],

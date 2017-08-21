@@ -38,6 +38,7 @@
                 <div class="input-group">
                     <button type="submit" class="btn btn-primary">搜索</button>&nbsp;
                     <button type="button" class="btn btn-warning" id="restSearchForm">重置</button>&nbsp;
+<!--                     <a href="{{-- route('admin.syncGameRecord') --}}" class="btn btn-primary btn-xs">同步游戏记录</a> -->
                 </div>
             </div>
         </div>

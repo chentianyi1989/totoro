@@ -251,6 +251,12 @@ class MemberController extends AdminBaseController
                     'fs_money' => $request->get('fs_money'),
                     'email' => $request->get('email'),
                     'phone' => $request->get('phone'),
+                    'bank_username' => $request->get('bank_username'),
+                    'bank_name' => $request->get('bank_name'),
+                    'bank_card' => $request->get('bank_card'),
+                    'bank_branch_name' => $request->get('bank_branch_name'),
+                    'bank_address' => $request->get('bank_address'),
+                    
                 ]);
         }else{
             $member->update($request->all());

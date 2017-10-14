@@ -10,8 +10,9 @@ use App\Models\MemberAPi;
 use App\Models\Transfer;
 use App\Services\AgService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use \Exception;
 use DB;
+
 class AgController extends WebBaseController
 {
     protected $service,$api;
@@ -124,7 +125,7 @@ class AgController extends WebBaseController
         }
 
         //先扣除用户余额
-        $member->decrement($amount_type , $amount);
+        
 
         $result = $this->service->deposit($username, $password,$amount);
         $res = json_decode($result, TRUE);
@@ -132,7 +133,9 @@ class AgController extends WebBaseController
         if ($res['Code'] == 0)
         {
             try{
+                
                 DB::transaction(function() use($member_api, $res,$amount_type,$amount,$member,$result) {
+                    $member->decrement($amount_type , $amount);
                     //平台账户
                     $member_api->increment('money', $amount);
                     //个人账户
@@ -151,12 +154,10 @@ class AgController extends WebBaseController
                     //修改api账号余额
                     $this->api->decrement('api_money' , $amount);
                 });
-            }catch(\Exception $e){
+            }catch(Exception $e){
                 DB::rollback();
             }
         } else {
-            //退回用户
-            $member->increment($amount_type , $amount);
             $return['Code'] = $res['Code'];
             $return['Message'] = '错误代码 '.$res['Code'].' 请联系客服';
         }
@@ -287,15 +288,17 @@ class AgController extends WebBaseController
     public function getGameRecord()
     {
         set_time_limit(0);
-        $end_date = date('Y-m-d H:i:s');
-        //$start_time = date('Y-m-d H:i:s', strtotime('-180 minutes'));
-        $start_time = date('Y-m-d H:i:s', strtotime('-1 day'));
+//         $endDate = date('Y-m-d H:i:s');
+//         $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
+        $startDate = date("Y-m-d",strtotime("-2 days"))." 00:00:00";
+        $endDate = date("Y-m-d",strtotime("-1 days"))." 00:00:00";
+        echo "$startDate,$endDate\n";
         $page = 1;
-        $pagesize = 5000;
+        $pagesize = 1000;
 
         //$res = json_decode($this->service->betrecord('', $start_time, $end_date,$page, $pagesize), TRUE);
 
-        $res = $this->dy('', $start_time, $end_date,$page, $pagesize);
+        $res = $this->dy('', $startDate, $endDate,$page, $pagesize);
 
         if ($res['Code'] == 0)
         {
@@ -304,7 +307,7 @@ class AgController extends WebBaseController
             $PageLimit   = $res["PageSize"];
             $TotalNumber = $res["TotalCount"];
             $TotalPage   = $res["PageCount"];
-
+            echo "TotalPage:$TotalPage,TotalNumber:$TotalNumber,PageLimit:$PageLimit,Page:$Page\n";
 //            for ($i =0;$i<$TotalPage;$i++)
 //            {
 //
@@ -312,8 +315,6 @@ class AgController extends WebBaseController
 
             if (count($data) > 0)
             {
-
-
 
 //                $page ++;
 //                if ($page > $TotalPage)

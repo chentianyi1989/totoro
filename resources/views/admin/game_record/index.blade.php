@@ -17,7 +17,7 @@
                          <th style="width: 10%">游戏类别</th>
                          <th style="width: 10%">输赢情况</th>
                          <th style="width: 10%">下注金额</th>
-                         <th style="width: 20%">下注时间</th>
+                         <th style="width: 20%">派彩时间</th>
                      </tr>
                      @foreach($data as $item)
                          <tr>
@@ -43,7 +43,7 @@
                                  {{ $item->betAmount }}
                              </td>
                              <td>
-                                 {{ $item->betTime }}
+                                 {{ $item->recalcuTime }}
                              </td>
                          </tr>
                      @endforeach

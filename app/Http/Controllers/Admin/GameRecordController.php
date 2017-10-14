@@ -27,19 +27,19 @@ class GameRecordController extends AdminBaseController
         if ($request->has('start_at'))
         {
             $start_at = $request->get('start_at');
-            $mod = $mod->where('betTime', '>=', $start_at);
+            $mod = $mod->where('recalcuTime', '>=', $start_at);
         }
         if ($request->has('end_at'))
         {
             $end_at = $request->get('end_at');
-            $mod = $mod->where('betTime', '<=',$end_at);
+            $mod = $mod->where('recalcuTime', '<=',$end_at);
         }
 
 
         $total_netAmount = $mod->sum('netAmount');
         $total_betAmount = $mod->sum('betAmount');
 
-        $data = $mod->orderBy('created_at', 'desc')->paginate(config('admin.page-size'));
+        $data = $mod->orderBy('recalcuTime', 'desc')->paginate(config('admin.page-size'));
 
         return view('admin.game_record.index', compact('data', 'playerName', 'start_at', 'end_at', 'api_type', 'total_netAmount', 'total_betAmount'));
     }

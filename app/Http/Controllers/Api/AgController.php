@@ -288,7 +288,7 @@ class AgController extends WebBaseController
     public function getGameRecord(){
 //         set_time_limit(0);
         
-        
+//         $start_time = date('Y-m-d H:i:s', strtotime('-180 minutes'));
         $startDate = GameRecord::where('api_type', $this->api->id)->max('recalcuTime');
         
 //         $startDate = date("Y-m-d",strtotime("-2 days"))." 00:00:00";

@@ -320,9 +320,14 @@ class AgController extends WebBaseController
                     foreach($data as $value) {
                         if ($value["SceneID"]) {
                             $BillNo = $value["SceneID"];
+                            $netAmount = $value["TransferAmount"];
+                            $betAmount = $value["Cost"];
                         }else {
                             $BillNo = $value["BillNo"];
+                            $netAmount = $value["NetAmount"];
+                            $betAmount = $value["BetAmount"];
                         }
+                        
                         if (!GameRecord::where('BillNo', $BillNo)->where('api_type', $this->api->id)->first()) {
                             $l = strlen($this->api->prefix);
                             $PlayerName = $value["PlayerName"];

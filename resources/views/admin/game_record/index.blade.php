@@ -126,8 +126,8 @@
 @section("after.js")
      @include('admin.layouts.delete',['title'=>'操作提示','content'=>'你确定要删除这个返水等级吗?'])
      <script>
-         var start = {
-             elem: '#start_at',
+         var start_at_recalcuTime = {
+             elem: '#start_at_recalcuTime',
              format: 'YYYY-MM-DD hh:mm:ss',
              //min: laydate.now(), //设定最小日期为当前日期
              max: '2099-06-16 23:59:59', //最大日期
@@ -138,8 +138,8 @@
                  end.start = datas //将结束日的初始值设定为开始日
              }
          };
-         var end = {
-             elem: '#end_at',
+         var end_at_recalcuTime = {
+             elem: '#end_at_recalcuTime',
              format: 'YYYY-MM-DD 23:59:59',
              //min: laydate.now(),
              max: '2099-06-16 23:59:59',
@@ -149,7 +149,32 @@
                  start.max = datas; //结束日选好后，重置开始日的最大日期
              }
          };
-         laydate(start);
-         laydate(end);
+         var start_at_betTime = {
+                 elem: '#start_at_betTime',
+                 format: 'YYYY-MM-DD hh:mm:ss',
+                 //min: laydate.now(), //设定最小日期为当前日期
+                 max: '2099-06-16 23:59:59', //最大日期
+                 istime: true,
+                 istoday: false,
+                 choose: function(datas){
+                     end.min = datas; //开始日选好后，重置结束日的最小日期
+                     end.start = datas //将结束日的初始值设定为开始日
+                 }
+             };
+         var end_at_betTime = {
+             elem: '#end_at_betTime',
+             format: 'YYYY-MM-DD 23:59:59',
+             //min: laydate.now(),
+             max: '2099-06-16 23:59:59',
+             istime: true,
+             istoday: true,
+             choose: function(datas){
+                 start.max = datas; //结束日选好后，重置开始日的最大日期
+             }
+         };
+         laydate(start_at_recalcuTime);
+         laydate(end_at_recalcuTime);
+         laydate(start_at_betTime);
+         laydate(end_at_betTime);
      </script>
 @endsection

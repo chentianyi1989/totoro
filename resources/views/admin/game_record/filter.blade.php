@@ -35,13 +35,13 @@
             <div class="col-lg-3">
                 <div class="input-group">
                     <span class="input-group-addon">下注开始时间</span>
-                    <input type="text" class="form-control" name="start_at_betTime" id="start_at" value="{{ $start_at_betTime }}" readonly>
+                    <input type="text" class="form-control" name="start_at_betTime" id="start_at_betTime" value="{{ $start_at_betTime }}" readonly>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="input-group">
                     <span class="input-group-addon">下注结束时间</span>
-                    <input type="text" class="form-control" name="end_at_betTime" id="end_at" value="{{ $end_at_betTime }}" readonly>
+                    <input type="text" class="form-control" name="end_at_betTime" id="end_at_betTime" value="{{ $end_at_betTime }}" readonly>
                 </div>
             </div>
 

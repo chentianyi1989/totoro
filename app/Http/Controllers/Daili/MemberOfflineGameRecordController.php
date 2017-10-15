@@ -47,10 +47,13 @@ class MemberOfflineGameRecordController extends DailiBaseController
 
         $total_netAmount = $mod->sum('netAmount');
         $total_betAmount = $mod->sum('betAmount');
+        $total_validBetAmount = $mod->sum('validBetAmount');
+        
+        
 
         $data = $mod->orderBy('created_at', 'desc')->paginate(config('admin.page-size'));
 
-        return view('daili.member_offline_game_record.index', compact('data', 'playerName','start_at', 'end_at', 'api_type', 'total_netAmount', 'total_betAmount', 'name'));
+        return view('daili.member_offline_game_record.index', compact('data', 'playerName','start_at', 'end_at', 'api_type', 'total_netAmount', 'total_betAmount','total_validBetAmount', 'name'));
     }
 
 //    public function index(Request $request)

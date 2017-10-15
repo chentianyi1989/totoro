@@ -12,10 +12,11 @@
                     <tr>
                         <th style="width: 5%">ID</th>
                         <th>账号</th>
-                        <th style="width: 20%">平台账号</th>
+                        <th style="width: 10%">平台账号</th>
                         <th style="width: 10%">平台名称</th>
                         <th style="width: 10%">输赢情况</th>
                         <th style="width: 10%">下注金额</th>
+                        <th style="width: 10%">有效下注金额</th>
                         <th style="width: 20%">下注时间</th>
                     </tr>
                     @foreach($data as $item)
@@ -39,6 +40,9 @@
                                 {{ $item->betAmount }}
                             </td>
                             <td>
+                            	{{ $item->validBetAmount }}
+                            </td>
+                            <td>
                                 {{ $item->betTime }}
                             </td>
                         </tr>
@@ -49,6 +53,7 @@
                         <td colspan="3"></td>
                         <td><strong style="color: red">{{ $total_netAmount }}</strong></td>
                         <td><strong style="color: red">{{ $total_betAmount }}</strong></td>
+                        <td><strong style="color: red">{{ $total_validBetAmount }}</strong></td>
                         <td></td>
                     </tr>
                     </tfoot>

@@ -62,7 +62,7 @@
                          <p>总共 <strong style="color: red">{{ $data->total() }}</strong> 条</p>
                      </div>
                  <div class="pull-right" style="margin: 0;">
-                    {!! $data->appends(['playerName' => $playerName, 'start_at' => $start_at, 'end_at' => $end_at, 'api_type' => $api_type])->links() !!}
+                    {!! $data->appends(['playerName' => $playerName, 'start_at_betTime' => $start_at_betTime, 'end_at_betTime' => $end_at_betTime, 'api_type' => $api_type])->links() !!}
                  </div>
                  </div>
 

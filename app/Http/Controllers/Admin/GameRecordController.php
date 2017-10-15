@@ -13,7 +13,7 @@ class GameRecordController extends AdminBaseController
     public function index(Request $request)
     {
         $mod = new GameRecord();
-        $playerName = $start_at = $end_at = $api_type = '';
+        $playerName = $start_at = $end_at = $api_type = $start_at_recalcuTime = $end_at_recalcuTime = $start_at_betTime = $end_at_betTime = '';
         if ($request->has('api_type'))
         {
             $api_type = $request->get('api_type');
@@ -26,24 +26,24 @@ class GameRecordController extends AdminBaseController
         }
         if ($request->has('start_at_recalcuTime'))
         {
-            $start_at = $request->get('start_at_recalcuTime');
-            $mod = $mod->where('recalcuTime', '>=', $start_at);
+            $start_at_recalcuTime = $request->get('start_at_recalcuTime');
+            $mod = $mod->where('recalcuTime', '>=', $start_at_recalcuTime);
         }
         if ($request->has('end_at_recalcuTime'))
         {
-            $end_at = $request->get('end_at_recalcuTime');
-            $mod = $mod->where('recalcuTime', '<=',$end_at);
+            $end_at_recalcuTime = $request->get('end_at_recalcuTime');
+            $mod = $mod->where('recalcuTime', '<=',$end_at_recalcuTime);
         }
         
         if ($request->has('start_at_betTime')){
             
-            $start_at = $request->get('start_at_betTime');
-            $mod = $mod->where('betTime', '>=', $start_at);
+            $start_at_betTime = $request->get('start_at_betTime');
+            $mod = $mod->where('betTime', '>=', $start_at_betTime);
         }
         if ($request->has('end_at_betTime')){
             
-            $end_at = $request->get('end_at_betTime');
-            $mod = $mod->where('betTime', '<=',$end_at);
+            $end_at_betTime = $request->get('end_at_betTime');
+            $mod = $mod->where('betTime', '<=',$end_at_betTime);
         }
 
         $total_netAmount = $mod->sum('netAmount');

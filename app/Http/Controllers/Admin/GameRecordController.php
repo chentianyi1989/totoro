@@ -24,24 +24,34 @@ class GameRecordController extends AdminBaseController
             $playerName = $request->get('playerName');
             $mod = $mod->where('playerName', 'like', "%$playerName%");
         }
-        if ($request->has('start_at'))
+        if ($request->has('start_at_recalcuTime'))
         {
-            $start_at = $request->get('start_at');
+            $start_at = $request->get('start_at_recalcuTime');
             $mod = $mod->where('recalcuTime', '>=', $start_at);
         }
-        if ($request->has('end_at'))
+        if ($request->has('end_at_recalcuTime'))
         {
-            $end_at = $request->get('end_at');
+            $end_at = $request->get('end_at_recalcuTime');
             $mod = $mod->where('recalcuTime', '<=',$end_at);
         }
-
+        
+        if ($request->has('start_at_betTime')){
+            
+            $start_at = $request->get('start_at_betTime');
+            $mod = $mod->where('betTime', '>=', $start_at);
+        }
+        if ($request->has('end_at_betTime')){
+            
+            $end_at = $request->get('end_at_betTime');
+            $mod = $mod->where('betTime', '<=',$end_at);
+        }
 
         $total_netAmount = $mod->sum('netAmount');
         $total_betAmount = $mod->sum('betAmount');
 
         $data = $mod->orderBy('recalcuTime', 'desc')->paginate(config('admin.page-size'));
 
-        return view('admin.game_record.index', compact('data', 'playerName', 'start_at', 'end_at', 'api_type', 'total_netAmount', 'total_betAmount'));
+        return view('admin.game_record.index', compact('data', 'playerName', 'start_at_recalcuTime', 'end_at_recalcuTime','start_at_betTime','end_at_betTime', 'api_type', 'total_netAmount', 'total_betAmount'));
     }
     
     public function syncGameRecord (Request $request){

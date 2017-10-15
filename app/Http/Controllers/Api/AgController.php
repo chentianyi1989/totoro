@@ -285,50 +285,45 @@ class AgController extends WebBaseController
 
     }
 
-    public function getGameRecord()
-    {
-        set_time_limit(0);
-//         $endDate = date('Y-m-d H:i:s');
-//         $startDate = date('Y-m-d H:i:s', strtotime('-1 day'));
-        $startDate = date("Y-m-d",strtotime("-2 days"))." 00:00:00";
-        $endDate = date("Y-m-d",strtotime("-1 days"))." 00:00:00";
+    public function getGameRecord(){
+//         set_time_limit(0);
+        
+        
+        $startDate = GameRecord::where('api_type', $this->api->id)->max('recalcuTime');
+        
+//         $startDate = date("Y-m-d",strtotime("-2 days"))." 00:00:00";
+        $endDate = date("Y-m-d H:i:s",strtotime($startDate)+ 14*60);//每次同步14分钟的数据
         echo "$startDate,$endDate\n";
         $page = 1;
-        $pagesize = 1000;
-
-        //$res = json_decode($this->service->betrecord('', $start_time, $end_date,$page, $pagesize), TRUE);
+        $pagesize = 500;
 
         $res = $this->dy('', $startDate, $endDate,$page, $pagesize);
-
-        if ($res['Code'] == 0)
-        {
-            $data = $res["Data"]["Records"];
-            $Page        = $res["PageIndex"];
-            $PageLimit   = $res["PageSize"];
-            $TotalNumber = $res["TotalCount"];
+        if ($res['Code'] == 0) {
+            
             $TotalPage   = $res["PageCount"];
-            echo "TotalPage:$TotalPage,TotalNumber:$TotalNumber,PageLimit:$PageLimit,Page:$Page\n";
-//            for ($i =0;$i<$TotalPage;$i++)
-//            {
-//
-//            }
-
-            if (count($data) > 0)
-            {
-
-//                $page ++;
-//                if ($page > $TotalPage)
-//                {
-//                    $page = 1;
-//                }
-
-                foreach($data as $value)
-                {
-                    //捕鱼
-                    if ($value["SceneID"])
-                    {
-                        if (!GameRecord::where('BillNo', $value["SceneID"])->where('api_type', $this->api->id)->first())
-                        {
+            $TotalNumber = $res["TotalCount"];
+//             echo "TotalPage:$TotalPage,TotalNumber:$TotalNumber\n";
+            if ($TotalPage > 1) {
+                
+                $pagesize = $res["TotalCount"];
+                $res = $this->dy('', $startDate, $endDate,$page, $pagesize);
+            }
+            if ($res['Code'] == 0) {
+                $data = $res["Data"]["Records"];
+                $Page        = $res["PageIndex"];
+                $PageLimit   = $res["PageSize"];
+                $TotalNumber = $res["TotalCount"];
+                $TotalPage   = $res["PageCount"];
+//                 echo "TotalPage:$TotalPage,TotalNumber:$TotalNumber,PageLimit:$PageLimit,Page:$Page\n";
+                
+                if (count($data) > 0){
+                    foreach($data as $value) {
+                        if ($value["SceneID"]) {
+                            $BillNo = $value["SceneID"];
+                        }else {
+                            $BillNo = $value["BillNo"];
+                        }
+                        if (!GameRecord::where('BillNo', $BillNo)->where('api_type', $this->api->id)->first()) {
                             $l = strlen($this->api->prefix);
                             $PlayerName = $value["PlayerName"];
                             $name = substr($PlayerName, $l);
@@ -350,66 +345,15 @@ class AgController extends WebBaseController
                                     $gameType = 7;
                             }
                             GameRecord::create([
-                                'billNo' => $value["SceneID"],
+                                'billNo' => $BillNo,
                                 'playerName' => $PlayerName,
                                 'agentCode' => $value["AgentCode"],
                                 'gameCode' => $value["GameCode"],
                                 'netAmount' => $value["TransferAmount"],
-//                                 'betTime' => date('Y-m-d H:i:s', strtotime($value["CreateDate"]) + 12*60*60),    // 如果与游戏返回的时间相差12小时则补齐
+    //                                 'betTime' => date('Y-m-d H:i:s', strtotime($value["Bet"]) + 12*60*60),    // 如果与游戏返回的时间相差12小时则补齐
                                 'betTime' => date('Y-m-d H:i:s', strtotime($value["CreateDate"])),
                                 'gameType' => $gameType,
                                 'betAmount' => $value["Cost"],
-                                'validBetAmount' => $value["ValidBetAmount"],
-                                'flag' => $value["Flag"],
-                                'playType' => $value["PlayType"],
-                                'currency' => $value["Currency"],
-                                'tableCode' => $value["TableCode"],
-                                'loginIP' => $value["LoginIP"],
-                                'recalcuTime' => $value["RecalcuTime"],
-                                'platformID' => $value["PlatformID"],
-                                'platformType' => $value["PlatformType"],
-                                'stringEx' => $value["StringEx"],
-                                'remark' => $value["Remark"],
-                                'round' => $value["Round"],
-                                'api_type' => $this->api->id,
-                                'name' => $name,
-                                'member_id' => $m->id
-                            ]);
-                        }
-
-                    } else {
-                        if (!GameRecord::where('BillNo', $value["BillNo"])->where('api_type', $this->api->id)->first()) {
-                            $l = strlen($this->api->prefix);
-                            $PlayerName = $value["PlayerName"];
-                            $name = substr($PlayerName, $l);
-                            $m = Member::where('name', $name)->first();
-
-                            switch ($value['PlatformType']) {
-                                case 'AGIN':
-                                    $gameType = 1;
-                                    break;
-                                case 'HUNTER':
-                                    $gameType = 2;
-                                    break;
-                                case 'AGTEX':
-                                    $gameType = 6;
-                                    break;
-                                case 'XIN':
-                                    $gameType = 3;
-                                    break;
-                                default :
-                                    $gameType = 7;
-                            }
-
-                            GameRecord::create([
-                                'billNo' => $value["BillNo"],
-                                'playerName' => $PlayerName,
-                                'agentCode' => $value["AgentCode"],
-                                'gameCode' => $value["GameCode"],
-                                'netAmount' => $value["NetAmount"],
-                                'betTime' => date('Y-m-d H:i:s', strtotime($value["BetTime"]) + 12 * 60 * 60),
-                                'gameType' => $gameType,
-                                'betAmount' => $value["BetAmount"],
                                 'validBetAmount' => $value["ValidBetAmount"],
                                 'flag' => $value["Flag"],
                                 'playType' => $value["PlayType"],
@@ -428,12 +372,9 @@ class AgController extends WebBaseController
                             ]);
                         }
                     }
-
                 }
             }
         }
-
-
     }
 
     protected function dy($username, $start_time, $end_date,$page, $pagesize)

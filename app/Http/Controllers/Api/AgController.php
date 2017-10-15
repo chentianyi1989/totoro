@@ -304,8 +304,13 @@ class AgController extends WebBaseController
             $TotalNumber = $res["TotalCount"];
 //             echo "TotalPage:$TotalPage,TotalNumber:$TotalNumber\n";
             if ($TotalPage > 1) {
+                if($TotalNumber>5000) { //这里还是有问题
+                    
+                    $page = $TotalPage;
+                }else {
+                    $pagesize = $TotalNumber;
+                }
                 
-                $pagesize = $res["TotalCount"];
                 $res = $this->dy('', $startDate, $endDate,$page, $pagesize);
             }else{
                 
@@ -356,11 +361,11 @@ class AgController extends WebBaseController
                                 'playerName' => $PlayerName,
                                 'agentCode' => $value["AgentCode"],
                                 'gameCode' => $value["GameCode"],
-                                'netAmount' => $value["TransferAmount"],
+                                'netAmount' => $netAmount,
     //                                 'betTime' => date('Y-m-d H:i:s', strtotime($value["Bet"]) + 12*60*60),    // 如果与游戏返回的时间相差12小时则补齐
                                 'betTime' => date('Y-m-d H:i:s', strtotime($value["CreateDate"])),
                                 'gameType' => $gameType,
-                                'betAmount' => $value["Cost"],
+                                'betAmount' => $betAmount,
                                 'validBetAmount' => $value["ValidBetAmount"],
                                 'flag' => $value["Flag"],
                                 'playType' => $value["PlayType"],

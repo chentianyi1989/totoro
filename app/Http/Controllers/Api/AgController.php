@@ -292,7 +292,7 @@ class AgController extends WebBaseController
         $startDate = GameRecord::where('api_type', $this->api->id)->max('recalcuTime');
         
 //         $startDate = date("Y-m-d",strtotime("-2 days"))." 00:00:00";
-        $endDate = date("Y-m-d H:i:s",strtotime($startDate)+ 14*60);//每次同步14分钟的数据
+        $endDate = date("Y-m-d H:i:s");//每次同步60分钟的数据,strtotime($startDate)+ 60*60
         echo "$startDate,$endDate\n";
         $page = 1;
         $pagesize = 500;
@@ -307,6 +307,8 @@ class AgController extends WebBaseController
                 
                 $pagesize = $res["TotalCount"];
                 $res = $this->dy('', $startDate, $endDate,$page, $pagesize);
+            }else{
+                
             }
             if ($res['Code'] == 0) {
                 $data = $res["Data"]["Records"];

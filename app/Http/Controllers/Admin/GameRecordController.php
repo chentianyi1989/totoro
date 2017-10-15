@@ -48,10 +48,11 @@ class GameRecordController extends AdminBaseController
 
         $total_netAmount = $mod->sum('netAmount');
         $total_betAmount = $mod->sum('betAmount');
+        $total_validBetAmount = $mod->sum('validBetAmount');
 
         $data = $mod->orderBy('recalcuTime', 'desc')->paginate(config('admin.page-size'));
 
-        return view('admin.game_record.index', compact('data', 'playerName', 'start_at_recalcuTime', 'end_at_recalcuTime','start_at_betTime','end_at_betTime', 'api_type', 'total_netAmount', 'total_betAmount'));
+        return view('admin.game_record.index', compact('data', 'playerName', 'start_at_recalcuTime', 'end_at_recalcuTime','start_at_betTime','end_at_betTime', 'api_type', 'total_netAmount', 'total_betAmount','total_validBetAmount'));
     }
     
     public function syncGameRecord (Request $request){

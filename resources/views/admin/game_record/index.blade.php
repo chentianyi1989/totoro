@@ -17,6 +17,7 @@
                          <th style="width: 10%">游戏类别</th>
                          <th style="width: 10%">输赢情况</th>
                          <th style="width: 10%">下注金额</th>
+                         <th style="width: 10%">有效下注金额</th>
                          <th style="width: 20%">派彩时间</th>
                      </tr>
                      @foreach($data as $item)
@@ -43,6 +44,9 @@
                                  {{ $item->betAmount }}
                              </td>
                              <td>
+                                 {{ $item->validBetAmount }}
+                             </td>
+                             <td>
                                  {{ $item->recalcuTime }}
                              </td>
                          </tr>
@@ -53,6 +57,7 @@
                          <td colspan="4"></td>
                          <td><strong style="color: red">{{ $total_netAmount }}</strong></td>
                          <td><strong style="color: red">{{ $total_betAmount }}</strong></td>
+                         <td><strong style="color: red">{{ $total_validBetAmount }}</strong></td>
                          <td></td>
                      </tr>
                      </tfoot>

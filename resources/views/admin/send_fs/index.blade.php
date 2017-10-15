@@ -21,7 +21,7 @@
                             <th style="width: 10%">会员</th>
                             <th style="width: 20%">游戏类型</th>
                             <th style="width: 5%">笔数</th>
-                            <th>投注金额</th>
+                            <th>有效投注金额</th>
                             <th style="width: 20%">返水等级</th>
                             <th style="width: 10%">返水比例</th>
                             <th style="width: 15%">返水金额</th>
@@ -49,15 +49,15 @@
                             }
 
                             $game_mod = $game_mod->whereIn('gameType', $gameType);
-                            foreach ($gameType as $v)
+                            foreach ($gameType as $v){
                                 $gameType_str.=config('platform.game_type')[$v].'&';
-
+                            }
                             $gameType_str = rtrim($gameType_str, '&');
 
                             $game_mod = $game_mod->where('member_id', $member_id);
 
                             $num = $game_mod->count();
-                            $tz_amount = $game_mod->sum('betAmount');//投注总额
+                            $tz_amount = $game_mod->sum('validBetAmount');//有效投注总额
                             //返水等级
                             $fs_level = \App\Models\FsLevel::orderBy('level', 'desc')->get();
                             $rate = 0;$level_name = '';

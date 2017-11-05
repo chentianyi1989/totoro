@@ -232,7 +232,7 @@ class MemberController extends AdminBaseController
 
         $member= Member::findOrFail($id);
         $old_money = $member->money;
-        $old_fs_money = $member->money;
+        $old_fs_money = $member->fs_money;
         $new_money = $request->get('money');
         $new_fs_money = $request->get('fs_money');
         if (!$request->has('password'))

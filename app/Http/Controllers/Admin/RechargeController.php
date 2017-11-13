@@ -77,42 +77,43 @@ class RechargeController extends Controller
 
         $mod = Recharge::findOrFail($id);
         $data = $request->all();
-        try{
-            DB::transaction(function() use($mod, $data,$request) {
-
-                $diff_money = $request->get('diff_money') > 0 ? $request->get('diff_money') : 0 ;
-
-                $mod->update([
-                    'status' => 2,
-                    'confirm_at' => date('Y-m-d H:i:s'),
-                    'diff_money' => $diff_money,
-                    'user_id' => \Auth::user()->id
-                ]);
-
-                //如果存在赠送金额 则添加进红利表
-                if ($diff_money > 0)
-                    Dividend::create([
-                        'member_id' => $mod->member_id,
-                        'type' => 1,
-                        'money' => $request->get('diff_money'),
-                        'describe' => '充值赠送金额',
-//                        'before_money' => $mod->member->money,
-//                        'after_money' => $mod->member->money + $data['money'],
-                        'status' => 1
+        
+        if ($mod->status != 2) {
+            try{
+                DB::transaction(function() use($mod, $data,$request) {
+                    
+                    $diff_money = $request->get('diff_money') > 0 ? $request->get('diff_money') : 0 ;
+                    
+                    $mod->update([
+                        'status' => 2,
+                        'confirm_at' => date('Y-m-d H:i:s'),
+                        'diff_money' => $diff_money,
+                        'user_id' => \Auth::user()->id
                     ]);
-
-                //用户中心账户加钱
-                $m = $mod->money + $diff_money;
-                $mod->member()->increment('money', $m);
-
-
-
-            });
-        }catch(Exception $e){
-            DB::rollback();
-            return respF('创建失败');
+                    
+                    //如果存在赠送金额 则添加进红利表
+                    if ($diff_money > 0)
+                        Dividend::create([
+                            'member_id' => $mod->member_id,
+                            'type' => 1,
+                            'money' => $request->get('diff_money'),
+                            'describe' => '充值赠送金额',
+                            //                        'before_money' => $mod->member->money,
+                        //                        'after_money' => $mod->member->money + $data['money'],
+                            'status' => 1
+                        ]);
+                        
+                        //用户中心账户加钱
+                        $m = $mod->money + $diff_money;
+                        $mod->member()->increment('money', $m);
+                        
+                });
+            }catch(Exception $e){
+                DB::rollback();
+                return respF('创建失败');
+            }
         }
-
+        
         return responseSuccess('确认汇款成功', '', route('recharge.index'));
     }
 

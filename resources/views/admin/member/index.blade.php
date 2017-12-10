@@ -10,7 +10,7 @@
 
                  <table class="table table-bordered table-hover text-center">
                      <tr>
-<!--                          <th style="width: 5%">ID</th> -->
+                         <th style="width: 5%">ID</th>
                          <th class="text-center">用户名</th>
                          <th  style="width: 8%">中心账户</th>
                          <th  style="width: 8%">红利账户</th>
@@ -24,9 +24,9 @@
                      </tr>
                      @foreach($data as $item)
                          <tr>
-<!--                              <td> -->
-<!--                                  {{ $item->id }} -->
-<!--                              </td> -->
+                             <td>
+                                 {{ $item->id }}
+                             </td>
                              <td>
                                  {{ $item->name }}
                              </td>

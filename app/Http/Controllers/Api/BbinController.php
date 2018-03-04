@@ -10,7 +10,7 @@ use App\Models\MemberAPi;
 use App\Models\Transfer;
 use App\Services\BbinService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use \Exception;
 use DB;
 class BbinController extends WebBaseController
 {

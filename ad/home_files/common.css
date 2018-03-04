@@ -1,0 +1,359 @@
+@charset "utf-8";
+/* 酷站代码整理 http://www.5icool.org */
+body{
+   -webkit-text-size-adjust:none;
+}
+#warp,#head,#foot{
+    width:100%;
+}
+#main{
+	width:1028px;
+	margin:0 auto;
+}
+
+
+
+
+
+
+
+
+.xx_sm{
+	padding-top:20px;
+}
+.title2{
+	height:25px;
+	background:url(../img/title2_bg.jpg) repeat-x bottom;
+}
+.title2 span{
+	color:#333;
+	font-size:16px;
+	font-weight:bold;
+	height:25px;
+	display:inline-block;
+	padding:0 13px;
+	background:url(../img/title2Span_bg.jpg) repeat-x bottom;
+}
+
+.fw_lx{
+	padding:5px 14px;
+}
+.fw_lx ul{
+	float:left;
+}
+.fw_lx li{
+	width:190px;
+	float:left;
+	font-size:13px;
+	color:#333;
+	padding:5px 0;
+}
+.fw_lx li span{
+	width:70px;
+	display:block;
+	float:left;
+}
+.fw_lx li p{
+	width:120px;
+	float:right;
+	padding-bottom:2px;
+}
+
+
+
+.iinew ul li{
+  width:100%;
+  height:25px;
+  line-height:25px;
+  padding:7px 0;
+  border-bottom:1px dotted #E6E6E6;
+  font-family:"微软雅黑";
+  text-indent:6px;
+  overflow:hidden;
+}
+.iinew ul li a{
+  color:#444;
+}
+.iinew ul li a:hover{
+  color:#FFA700;
+}
+.title2{
+	height:25px;
+	background:url(../img/title2_bg.jpg) repeat-x bottom;
+}
+.title2 span{
+	color:#111;
+	font-size:16px;
+	font-weight:bold;
+	height:25px;
+	display:inline-block;
+	padding:0 13px;
+	background:url(../img/title2Span_bg.jpg) repeat-x bottom;
+	font-family:"微软雅黑";
+	font-weight:100;
+}
+
+.toushu{
+  display:block;
+  padding-top:8px;
+  line-height:18px;
+  color:#333333;
+  font-family:"微软雅黑";
+  font-size:13px;
+}
+.toushu ul li{
+  width:100%;
+  display:block; 
+  line-height:22px;
+  float:left;
+}
+.toushu ul li .ts_left{
+  width:64px;
+  float:left;
+  text-align:right;
+}
+.toushu ul li .ts_right{
+  width:156px;
+  float:left;
+  padding-left:2px;
+  text-indent:16px;
+}
+.ts_qq{
+  background:url(../img/r_ico_t.png) no-repeat 0px 4px;
+}
+.ts_tel{
+  background:url(../img/r_ico_t.png) no-repeat 0px -34px;
+}
+
+
+
+.kf_qq_r{
+  width:52px;
+  height:174px;
+  position:fixed;
+  top:200px;
+  right:-10px;
+	z-index: 99;
+}
+.kf_qq_r a{
+   background:url(../img/qq_kf.png) no-repeat -81px -66px;
+   display:block;
+   width:52px;
+   height:174px;
+}
+.kf_qq_r a:hover{
+  opacity: 0.8;
+}
+
+.democode{width:400px;margin:30px auto 0 auto;line-height:24px;}
+.democode h2{font-size:14px;color:#3366cc;height:28px;}
+.agree{margin:40px auto;width:400px;font-size:16px;font-weight:800;color:#3366cc;}
+
+.btnbox{text-align:center;height:30px;padding-top:10px;background:#ECF9FF;}
+
+#windownbg{
+  display:none;
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#000;
+  top:0;
+  left:0;
+}
+#windown-box{
+  position:fixed;
+  _position:absolute;
+  border:8px solid #4CB3E7;
+  background:#FFF;
+  text-align:left;
+}
+#windown-title{
+   position:relative;
+   height:44px;
+   border-bottom:1px solid #CCCCCC;
+   overflow:hidden;
+   background:#F5F5F5;
+}
+#windown-title h2{
+    background: url(../img/qq_kf.png) no-repeat scroll -66px 2px transparent;
+    color: #666666;
+    font-size: 25px;
+    font-weight: bold;
+    height: 40px;
+    left: 10px;
+    line-height: 40px;
+    padding-left: 84px;
+    position: absolute;
+    top: 5px;
+}
+#windown-title p{
+  color: #666666;
+    font-size: 15px;
+    font-weight: bold;
+    left: 198px;
+    position: absolute;
+    top: 17px;
+}
+#windown-close{
+    background: url(../img/qq_kf.png) no-repeat scroll -106px -42px transparent;
+    cursor: pointer;
+    height: 12px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    text-indent: -10em;
+    top: 17px;
+    width: 12px;
+}
+.mainlist{
+  width:100%;
+}
+#windown-content-border{position:relative;top:-1px;}
+.kf_qq_li{
+  padding:19px 0;
+  background: url(../img/qq_kf_line.gif) no-repeat center bottom;
+  float:left;
+  width:100%;
+}
+.kf_qq_li .kf_qq_li_left{
+  width:175px;
+  float:left;
+  background-image:url(../img/qq_kf.png);
+  margin-right:22px;
+  height:50px;
+}
+.kf_qq_li .kf_qq_li_right{
+  width:394px;
+  float:left;
+  font-family:"微软雅黑";
+  color:#333;
+}
+.kf_qq_li_1{
+  background-position:3px -262px;
+}
+.kf_qq_li_2{
+  background-position:3px -355px;
+}
+.kf_qq_li_3{
+  background-position:0px -425px;
+}
+.kf_qq_li_4{
+  background-position:0px -510px;
+}
+
+
+.kf_r_t{
+  width:100%;
+  float:left;
+  padding-bottom:4px;
+}
+.kf_r_t span{
+  font-size:16px;
+  float:left;
+  padding-top:3px;
+}
+.kf_r_t .qyqq{
+  width:102px;
+  height:24px;
+  line-height:24px;
+  font-size:15px;
+  color:#fff;
+  background:#3A9EDF;
+  display:block;
+  text-align:center;
+  float:left;
+  font-weight:bold;
+}
+
+.kf_qq_c{
+  width:100%;
+  float:left;
+  overflow:hidden;
+}
+.kf_qq_c ul{
+  width:408px;
+}
+.kf_qq_c ul li{
+   width:93px;
+   height:23px;
+   float:left;
+   margin-right:7px;
+   display:inline;
+   margin-bottom:7px;
+   font-family:"宋体";
+}
+.kf_qq_c ul li a{
+  width:93px;
+  height:23px;
+  line-height:23px;
+  display:block;
+  color:#333;
+  text-align:center;
+  font-size:13px;
+  background:url(../img/qq_kf.png) -51px -654px;
+}
+.kf_qq_c ul a:hover{
+  background:url(../img/qq_kf.png) -51px -685px;
+  color:#fff;
+}
+.kf_r_d{
+    border-top: 1px solid #CCCCCC;
+    float: left;
+    font-size: 12px;
+    padding-top: 4px;
+    width: 100%;
+}
+.ke_qq_jl{
+  width:189px;
+  float:left;
+}
+.ke_qq_jl_l{
+  background: url(../img/kf_qq_line2.jpg) no-repeat right  top;
+  min-height:100px;
+  margin-right:13px;
+}
+.ke_qq_jl p{
+  line-height:20px;
+  display:block;
+  float:left;
+  width:100%;
+}
+.ke_qq_jl .jl_left{
+  float:left;
+  width:53px;
+  font-size:13px;
+}
+.ke_qq_jl .jl_right{
+  float:left;
+  width:134px;
+  font-size:13px;
+  line-height:20px;
+}
+.ke_qq_jl .jl_right .jl_call{
+  padding-left:24px;
+  float:left;
+  display:block;
+  background:url(../img/qq_kf.png) -77px -590px;
+  padding-bottom:2px;
+}
+.ke_qq_jl .jl_right .jl_qq{
+  padding-left:25px;
+  float:left;
+  display:block;
+  background:url(../img/qq_kf.png) -77px -609px;
+}
+.ke_qq_jl .jl_right .jl_qq a{
+  width:93px;
+  height:23px;
+  line-height:23px;
+  display:block;
+  color:#333;
+  text-align:center;
+  font-size:13px;
+  background:url(../img/qq_kf.png) -51px -654px;
+}
+.ke_qq_jl .jl_right .jl_qq a:hover{
+  background:url(../img/qq_kf.png) -51px -685px;
+  color:#fff;
+}
+
